@@ -1,0 +1,57 @@
+<mat-toolbar color="primary" class="topbar">
+  <div class="topbar-left">
+    @if (isHandset) {
+      <button 
+        mat-icon-button 
+        (click)="onMenuToggle()" 
+        aria-label="Toggle navigation menu">
+        <mat-icon>menu</mat-icon>
+      </button>
+    }
+    <span class="logo" aria-label="SEO-IA Dashboard">
+      <mat-icon class="logo-icon">insights</mat-icon>
+      <span class="logo-text">SEO-IA</span>
+    </span>
+  </div>
+
+  <div class="topbar-center">
+    <mat-form-field appearance="outline" class="search-field">
+      <mat-icon matPrefix>search</mat-icon>
+      <input 
+        matInput 
+        [(ngModel)]="searchQuery"
+        placeholder="Search keywords, pages..."
+        (keyup.enter)="onSearch()"
+        aria-label="Search keywords and pages">
+    </mat-form-field>
+  </div>
+
+  <div class="topbar-right">
+    <button 
+      mat-icon-button 
+      [matBadge]="notificationCount" 
+      matBadgeColor="warn"
+      matBadgeSize="small"
+      aria-label="Notifications">
+      <mat-icon>notifications</mat-icon>
+    </button>
+
+    <button 
+      mat-icon-button 
+      [matMenuTriggerFor]="userMenu"
+      aria-label="User menu">
+      <mat-icon>account_circle</mat-icon>
+    </button>
+
+    <mat-menu #userMenu="matMenu">
+      <button mat-menu-item (click)="onProfile()">
+        <mat-icon>person</mat-icon>
+        <span>Profile</span>
+      </button>
+      <button mat-menu-item (click)="onLogout()">
+        <mat-icon>logout</mat-icon>
+        <span>Logout</span>
+      </button>
+    </mat-menu>
+  </div>
+</mat-toolbar>

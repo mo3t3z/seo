@@ -1,0 +1,22 @@
+<div class="sidebar-wrapper">
+  <mat-nav-list>
+    @for (item of navItems; track item.route) {
+      <a 
+        mat-list-item 
+        [routerLink]="item.route" 
+        routerLinkActive="active-link"
+        (click)="onLinkClick()"
+        [attr.aria-label]="'Navigate to ' + item.label">
+        <mat-icon matListItemIcon>{{ item.icon }}</mat-icon>
+        <span matListItemTitle>{{ item.label }}</span>
+      </a>
+    }
+  </mat-nav-list>
+  
+  <div class="sidebar-footer">
+    <div class="version-info">
+      <span class="version-label">SEO-IA Dashboard</span>
+      <span class="version-number">v1.0.0</span>
+    </div>
+  </div>
+</div>

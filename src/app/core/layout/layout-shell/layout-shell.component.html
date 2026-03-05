@@ -1,0 +1,27 @@
+<div class="layout-container">
+  <app-topbar 
+    [isHandset]="(isHandset$ | async) ?? false" 
+    (menuToggle)="toggleSidenav()"
+    aria-label="Top navigation bar">
+  </app-topbar>
+  
+  <mat-sidenav-container class="sidenav-container">
+    <mat-sidenav
+      #sidenav
+      [mode]="sidenavMode"
+      [opened]="sidenavOpened"
+      [fixedInViewport]="true"
+      [fixedTopGap]="64"
+      class="sidenav"
+      role="navigation"
+      aria-label="Main navigation">
+      <app-sidebar (linkClicked)="onSidebarLinkClicked()"></app-sidebar>
+    </mat-sidenav>
+    
+    <mat-sidenav-content class="main-content" role="main">
+      <div class="content-wrapper">
+        <router-outlet></router-outlet>
+      </div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>

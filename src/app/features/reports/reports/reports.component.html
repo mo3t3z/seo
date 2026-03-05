@@ -1,0 +1,150 @@
+<div class="reports-container">
+  <app-page-header 
+    title="Reports" 
+    subtitle="Performance summaries and insights">
+  </app-page-header>
+
+  <mat-card class="reports-card">
+    <mat-tab-group animationDuration="200ms">
+      <!-- Weekly Tab -->
+      <mat-tab label="Weekly">
+        <div class="tab-content">
+          @if (isLoadingWeekly) {
+            <app-loading-state message="Loading weekly report..."></app-loading-state>
+          } @else if (weeklyReport) {
+            <div class="report-header">
+              <h3>{{ weeklyReport.title }}</h3>
+              <button mat-stroked-button color="primary" (click)="onExportPdf()" aria-label="Export PDF">
+                <mat-icon>picture_as_pdf</mat-icon>
+                Export PDF
+              </button>
+            </div>
+
+            <div class="kpi-grid">
+              <app-metric-card
+                icon="ads_click"
+                label="Total Clicks"
+                [value]="(weeklyReport.totalClicks | number) || '0'"
+                [delta]="12.5"
+                tooltip="Total clicks this week">
+              </app-metric-card>
+              <app-metric-card
+                icon="visibility"
+                label="Impressions"
+                [value]="(weeklyReport.totalImpressions | number) || '0'"
+                [delta]="8.3"
+                tooltip="Total impressions this week">
+              </app-metric-card>
+              <app-metric-card
+                icon="percent"
+                label="Avg CTR"
+                [value]="weeklyReport.avgCtr + '%'"
+                [delta]="-1.2"
+                tooltip="Average click-through rate">
+              </app-metric-card>
+              <app-metric-card
+                icon="leaderboard"
+                label="Avg Position"
+                [value]="weeklyReport.avgPosition.toString()"
+                [delta]="3.5"
+                tooltip="Average ranking position">
+              </app-metric-card>
+            </div>
+
+            <div class="highlights-section">
+              <h4>Highlights</h4>
+              <mat-list>
+                @for (highlight of weeklyReport.highlights; track highlight) {
+                  <mat-list-item>
+                    <mat-icon matListItemIcon class="highlight-icon">check_circle</mat-icon>
+                    <span matListItemTitle>{{ highlight }}</span>
+                  </mat-list-item>
+                }
+              </mat-list>
+            </div>
+          }
+        </div>
+      </mat-tab>
+
+      <!-- Monthly Tab -->
+      <mat-tab label="Monthly">
+        <div class="tab-content">
+          @if (isLoadingMonthly) {
+            <app-loading-state message="Loading monthly report..."></app-loading-state>
+          } @else if (monthlyReport) {
+            <div class="report-header">
+              <h3>{{ monthlyReport.title }}</h3>
+              <button mat-stroked-button color="primary" (click)="onExportPdf()" aria-label="Export PDF">
+                <mat-icon>picture_as_pdf</mat-icon>
+                Export PDF
+              </button>
+            </div>
+
+            <div class="kpi-grid">
+              <app-metric-card
+                icon="ads_click"
+                label="Total Clicks"
+                [value]="(monthlyReport.totalClicks | number) || '0'"
+                [delta]="28.2"
+                tooltip="Total clicks this month">
+              </app-metric-card>
+              <app-metric-card
+                icon="visibility"
+                label="Impressions"
+                [value]="(monthlyReport.totalImpressions | number) || '0'"
+                [delta]="15.7"
+                tooltip="Total impressions this month">
+              </app-metric-card>
+              <app-metric-card
+                icon="percent"
+                label="Avg CTR"
+                [value]="monthlyReport.avgCtr + '%'"
+                [delta]="2.1"
+                tooltip="Average click-through rate">
+              </app-metric-card>
+              <app-metric-card
+                icon="leaderboard"
+                label="Avg Position"
+                [value]="monthlyReport.avgPosition.toString()"
+                [delta]="5.8"
+                tooltip="Average ranking position">
+              </app-metric-card>
+            </div>
+
+            <div class="highlights-section">
+              <h4>Highlights</h4>
+              <mat-list>
+                @for (highlight of monthlyReport.highlights; track highlight) {
+                  <mat-list-item>
+                    <mat-icon matListItemIcon class="highlight-icon">check_circle</mat-icon>
+                    <span matListItemTitle>{{ highlight }}</span>
+                  </mat-list-item>
+                }
+              </mat-list>
+            </div>
+          }
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+  </mat-card>
+
+  <!-- Insights Section -->
+  <mat-card class="insights-card">
+    <mat-card-header>
+      <mat-card-title>
+        <mat-icon class="insights-icon">lightbulb</mat-icon>
+        Insights
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-list>
+        @for (insight of insights; track insight) {
+          <mat-list-item>
+            <mat-icon matListItemIcon class="insight-bullet">arrow_right</mat-icon>
+            <span matListItemTitle>{{ insight }}</span>
+          </mat-list-item>
+        }
+      </mat-list>
+    </mat-card-content>
+  </mat-card>
+</div>

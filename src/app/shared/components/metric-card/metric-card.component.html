@@ -1,0 +1,15 @@
+<mat-card class="metric-card" [matTooltip]="tooltip" matTooltipPosition="above">
+  <mat-card-content>
+    <div class="card-icon">
+      <mat-icon>{{ icon }}</mat-icon>
+    </div>
+    <div class="card-content">
+      <span class="label">{{ label }}</span>
+      <span class="value">{{ value }}</span>
+      <span class="delta" [class.positive]="isPositive" [class.negative]="!isPositive">
+        <mat-icon class="delta-icon">{{ isPositive ? 'trending_up' : 'trending_down' }}</mat-icon>
+        {{ deltaDisplay }}
+      </span>
+    </div>
+  </mat-card-content>
+</mat-card>

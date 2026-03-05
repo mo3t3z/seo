@@ -1,0 +1,75 @@
+.metric-card {
+  height: 100%;
+  border-radius: 12px;
+  transition: box-shadow 0.2s ease;
+  cursor: default;
+  
+  &:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  mat-card-content {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 20px;
+  }
+}
+
+.card-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background-color: rgba(63, 81, 181, 0.1);
+  
+  mat-icon {
+    color: #3f51b5;
+    font-size: 24px;
+    width: 24px;
+    height: 24px;
+  }
+}
+
+.card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+}
+
+.label {
+  font-size: 0.875rem;
+  color: #666;
+  font-weight: 400;
+}
+
+.value {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.delta {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  
+  &.positive {
+    color: #4caf50;
+  }
+  
+  &.negative {
+    color: #f44336;
+  }
+  
+  .delta-icon {
+    font-size: 16px;
+    width: 16px;
+    height: 16px;
+  }
+}

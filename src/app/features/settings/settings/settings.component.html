@@ -1,0 +1,115 @@
+<div class="settings-container">
+  <app-page-header 
+    title="Settings" 
+    subtitle="Configure your analytics integration">
+  </app-page-header>
+
+  <mat-card class="settings-card">
+    <mat-card-content>
+      <form [formGroup]="settingsForm" (ngSubmit)="onSave()" class="settings-form">
+        <div class="form-section">
+          <h3>Site Configuration</h3>
+          
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Site URL</mat-label>
+            <input 
+              matInput 
+              formControlName="siteUrl"
+              placeholder="https://example.com"
+              aria-label="Site URL">
+            <mat-icon matPrefix>language</mat-icon>
+            <mat-hint>The primary URL of your website</mat-hint>
+            @if (settingsForm.get('siteUrl')?.touched && settingsForm.get('siteUrl')?.invalid) {
+              <mat-error>{{ getErrorMessage('siteUrl') }}</mat-error>
+            }
+          </mat-form-field>
+        </div>
+
+        <div class="form-section">
+          <h3>Analytics Integration</h3>
+          
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Google Analytics Property ID</mat-label>
+            <input 
+              matInput 
+              formControlName="gaPropertyId"
+              placeholder="G-XXXXXXXXXX or UA-XXXXX-X"
+              aria-label="Google Analytics Property ID">
+            <mat-icon matPrefix>analytics</mat-icon>
+            <mat-hint>Your GA4 or Universal Analytics property ID</mat-hint>
+            @if (settingsForm.get('gaPropertyId')?.touched && settingsForm.get('gaPropertyId')?.invalid) {
+              <mat-error>{{ getErrorMessage('gaPropertyId') }}</mat-error>
+            }
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Google Search Console Property</mat-label>
+            <input 
+              matInput 
+              formControlName="gscProperty"
+              placeholder="https://example.com/"
+              aria-label="Google Search Console Property">
+            <mat-icon matPrefix>search</mat-icon>
+            <mat-hint>Your verified GSC property URL</mat-hint>
+            @if (settingsForm.get('gscProperty')?.touched && settingsForm.get('gscProperty')?.invalid) {
+              <mat-error>{{ getErrorMessage('gscProperty') }}</mat-error>
+            }
+          </mat-form-field>
+        </div>
+
+        <div class="form-section">
+          <h3>Preferences</h3>
+          
+          <div class="form-row">
+            <mat-form-field appearance="outline" class="half-width">
+              <mat-label>Timezone</mat-label>
+              <mat-select formControlName="timezone" aria-label="Timezone">
+                @for (tz of timezones; track tz) {
+                  <mat-option [value]="tz">{{ tz }}</mat-option>
+                }
+              </mat-select>
+              <mat-icon matPrefix>schedule</mat-icon>
+              <mat-hint>Used for report generation</mat-hint>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="half-width">
+              <mat-label>Language</mat-label>
+              <mat-select formControlName="language" aria-label="Language">
+                @for (lang of languages; track lang.code) {
+                  <mat-option [value]="lang.code">{{ lang.name }}</mat-option>
+                }
+              </mat-select>
+              <mat-icon matPrefix>translate</mat-icon>
+              <mat-hint>Interface language</mat-hint>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <button 
+            mat-stroked-button 
+            type="button" 
+            (click)="onReset()"
+            aria-label="Reset to defaults">
+            Reset
+          </button>
+          <button 
+            mat-raised-button 
+            color="primary" 
+            type="submit"
+            [disabled]="isSaving"
+            aria-label="Save settings">
+            <ng-container *ngIf="isSaving; else notSaving">
+              <mat-icon class="spinning">sync</mat-icon>
+              Saving...
+            </ng-container>
+            <ng-template #notSaving>
+              <mat-icon>save</mat-icon>
+              Save Settings
+            </ng-template>
+          </button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>
