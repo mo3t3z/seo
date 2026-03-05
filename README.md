@@ -22,7 +22,7 @@ Avant d'installer l'application, assurez-vous d'avoir les éléments suivants in
 ### 1. Accéder au dossier du projet
 
 ```bash
-cd C:\Users\ayed hedi\Downloads\ghazi\seo-ia-dashboard
+cd seo-ia-dashboard
 ```
 
 ### 2. Installer les dépendances
